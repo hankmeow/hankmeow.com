@@ -2,6 +2,7 @@
 title: "About Me"
 date: 2023-02-01T11:52:03+08:00
 draft: false
+expand: false
 ---
 
 低段位小码农一枚，黑发尚在，肚腩已起。在变成油腻中年老大叔的道上一路狂奔。
