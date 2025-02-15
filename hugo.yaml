@@ -28,7 +28,8 @@ languageCode: zh-CN
 hasCJKLanguage: true
 # 每页显示文章数量
 # Display items per page
-paginate: 30
+pagination:
+    pagerSize: 30
 # 开启支持表情符号
 # Enable Emoji support
 enableEmoji: true
@@ -38,25 +39,15 @@ markup:
   goldmark:
     renderer:
       unsafe: true
+  # 高亮代码的样式
+  # Highlight style of code
   highlight:
-    # # 高亮代码的样式名称，可选：monokai | emacs | api | dracula | friendly
-    # # 更多的样式：https://xyproto.github.io/splash/docs/all.html
-    # # Highlight style: monokai | emacs | api | dracula | friendly
-    # # More: https://xyproto.github.io/splash/docs/all.html 
-    # style: "monokai"
     anchorLineNos: true
     codeFences: true
     guessSyntax: true
-    hl_Lines: ""
-    hl_inline: false
-    lineAnchors: ""
-    lineNoStart: 1
-    lineNos: false
-    lineNumbersInTable: false
-    noClasses: true
-    noHl: false
-    style: monokai
-    tabWidth: 2
+    lineNos: true
+    lineNumbersInTable: true
+    noClasses: false
   tableOfContents:
     # 开始/结束标题级别：1-6 (建议从2开始)
     # Heading title level of start or end: 1-6
@@ -109,7 +100,8 @@ minify:
 # 菜单配置说明
 # identifier ： 唯一标识不可重复
 # name       ： 菜单显示名称
-# pageref    ： 本站点链接地址，与 URL 选其一
+# pageRef    ： 文章在content目录下的相对路径, 更多信息请
+#               参考：https://gohugo.io/content-management/menus/#properties-site-configuration
 # url        ： 站点外部链接地址，以 http 或者 https 开头
 # pre        ： 菜单小图标
 # weight     ： 显示顺序，字数越小越靠前
@@ -117,7 +109,8 @@ minify:
 # Menus Settings
 # identifier : Unique ID cannot be repeated
 # name       : Menu name
-# pageref    : Link of webiste and not appeare same time with url
+# pageRef    : This article in content to director,more information
+#              ref:https://gohugo.io/content-management/menus/#properties-site-configuration
 # url        : Exteneral link out of website and start with http or https
 # pre        : Icon of menu
 # weight     : Order number and smaller is top
@@ -165,7 +158,7 @@ params:
   yearFormat: "2006"
   monthFormat: "01-02"
   dateFormat: "2006-01-02"
-  timeFormat: "2006-01-02T15:04:05-07:00"
+  timeFormat: "2006-01-02T15:04:05 -07:00"
 
   # 页面模式
   # Schemes
@@ -201,10 +194,10 @@ params:
 
   # 用户自定义文件配置
   # Define custom file paths.
-  # customFilePath:
-  #   sidebar: custom_sidebar.html
-  #   footer: custom_footer.html
-  #   style: /css/custom_style.css
+  #customFilePath:
+  #  sidebar: custom_sidebar.html
+  #  footer: custom_footer.html
+  #  style: /css/custom_style.css
 
   # 知识共享国际许可 4.0
   # 更多信息： https://creativecommons.org/about/cclicenses/
@@ -318,7 +311,7 @@ params:
   # Value before `||` delimiter is the target permalink, value after `||` delimiter is the name of Font Awesome icon.
   socials: 
     social0: Github || https://github.com/hankmeow || fab fa-github
-    social1: E-Mail || mailto:hankmeooow@gmail.com || fa fa-envelope
+    social1: E-Mail || mailto:hankmeooow@outlook.com || fa fa-envelope
     #social2: 知乎 || https://www.zhihu.com/people/lisenhui || fa fa-book
     #Google: https://plus.google.com/yourname || fab fa-google
     #Twitter: https://twitter.com/yourname || fab fa-twitter
@@ -440,18 +433,11 @@ params:
       # 供应商列表，请将带有图标的供应商放在前面
       # Vendors list, remember that who with logo image need put in top.
       list:
-        - name: Vercel
-          image: 
-            url: /imgs/vendors/vercel.svg
-            width: 50
-          link: https://vercel.com
-        - name: 又拍云
-          image: 
-            url: /imgs/vendors/upyun.png
-            width: 43
-          link: https://upyun.com
-        - name: Webify
-          link: https://webify.cloudbase.net
+        - name: Github
+          link: https://github.com
+          image:
+            url: /imgs/vendors/github.svg
+            width: 14
 
 
   # ---------------------------------------------------------------
@@ -485,15 +471,46 @@ params:
     # 是否开启评论数显示
     comments: 
       enable: false
-      # 评论统计插件，暂只支持waline
-      # Comment counter plugin, only support waline
+      # 评论统计插件，暂只支持waline和waline3
+      # Comment counter plugin, only support waline and waline3
       plugin: waline
     # 是否开启页面访问数显示
     views:
       enable: false
-      # 页面访问统计插件，支持busuanzi, waline, leancloud
-      # Page views counter plugin, support: busuanzi, waline, leancloud
+      # 页面访问统计插件，支持busuanzi, waline, waline3
+      # Page views counter plugin, support: busuanzi, waline, waline3
       plugin: busuanzi
+    # 是否开启过期提示
+    # Expired tip
+    expired: false
+    # 是否开启摘要显示
+    # Enable summary
+    summary: true
+
+  # 文章内容中的提示信息设置
+  # Alert settings in post content
+  postAlerts:
+    info:
+      icon: "circle-info"
+      color: "#4A90E2"
+    note:
+      icon: "bell"
+      color: "#17A2B8"
+    help:
+      icon: "circle-question"
+      color: "#967ADC"
+    error:
+      icon: "circle-xmark"
+      color: "#DC3545"
+    warning:
+      icon: "triangle-exclamation"
+      color: "#F39C12"
+    success:
+      icon: "circle-check"
+      color: "#32CD32"
+    important:
+      icon: "circle-plus"
+      color: "#007BFF"
 
   # 文章底部的设置
   # Post footer settings
@@ -809,17 +826,17 @@ params:
     # Lazyload all comment systems.
     # lazyload: false
     # 设置你要显示的2个评论插件，`weight` 数字越小越靠前
-    # `name` 参数名可选值：livere | waline | utterances | artalk | giscus
+    # `name` 参数名可选值：livere | waline | waline3 | utterances | artalk | giscus
     # Modify texts or order for any naves, here are some examples.
     nav:
       - name: waline
         title: Waline
         color: "#27ae60"
-        weight: 2
+        weight: 1
       - name: giscus
         title: Giscus
         color: "#886ce4"
-        weight: 1
+        weight: 2
 
   # Waline 评论插件
   # 更多配置信息请参考：https://waline.js.org/
@@ -836,6 +853,20 @@ params:
     reactionText: [ '点赞', '踩一下', '得意', '不屑', '尴尬', '睡觉']
     reactionTitle: "你认为这篇文章怎么样？"
     serverURL: #<your waline server url>
+  # Waline(2) 与 Waline3 无法兼容只能是二选一
+  # Waline3 采用的是ES模块开发，需要更高版本的浏览器才能支持，如考虑兼容性建议可优先选用Waline2
+  # waline3:
+  #   placeholder: "请文明发言哟 ヾ(≧▽≦*)o"
+  #   sofa: "快来发表你的意见吧 (≧∀≦)ゞ"
+  #   emoji: false
+  #   search: true
+  #   imgUploader: false
+  #   wordLimit: 200
+  #   requiredMeta: ['nick', 'mail']
+  #   reaction: true
+  #   reactionText: [ '点赞', '踩一下', '得意', '不屑', '尴尬', '睡觉']
+  #   reactionTitle: "你认为这篇文章怎么样？"
+  #   serverURL: #<your waline server url>
 
   # Artalk 评论插件
   # 更多配置信息请参考：https://artalk.js.org
@@ -921,11 +952,19 @@ params:
     id:     # <app_id>
     color:  "#fc6423"
 
-  # AddThis文章分享功能
-  # 更多信息及配置请参考：https://www.addthis.com
-  # AddThis Share. 
-  # See: https://www.addthis.com
-  addThisId: #<Your addthis> 
+  # 文章分享功能
+  share:
+    enable: true
+    # 更多信息与配置，请参考：https://sharethis.com
+    # For more information and configuration, please refer to:https://sharethis.com
+    # sharethis:
+    #   id: #<sharethis_id> 
+    # 简单的在线分享，没有统计数据功能，更多信息可参考：https://www.addtoany.com/
+    # Simple online sharing without statistical data function. 
+    # For more information, please refer to: https://www.addtoany.com/
+    addtoany:    
+      locale: zh-CN
+      num_services: 8 
 
 
   # ---------------------------------------------------------------
@@ -1073,7 +1112,6 @@ params:
     enable: true
     async: true
     transition:
-      # All available transition variants: https://theme-next.js.org/animate/
       postBlock: fadeIn
       postHeader: fadeInDown
       postBody: fadeInDown
@@ -1106,30 +1144,17 @@ params:
 
 
   # ---------------------------------------------------------------
-  # CDN 服务（暂时只支持 unpkg 和 cndjs）
+  # CDN 服务
   # CDN Settings
   # ---------------------------------------------------------------
-
   vendors:
     # The CDN provider of NexT internal scripts.
-    # Available values: local | unpkg | cdnjs | qiniu | bootcdn | custom
-    # Warning: If you are using the latest master branch of NexT, please set `internal: local`
+    # Available values: local | cdn
     internal: local
     # The default CDN provider of third-party plugins.
-    # Available values: local | unpkg | cdnjs| qiniu | bootcdn | custom
-    # Dependencies for `plugins: local`: https://github.com/next-theme/plugins
-    plugins: qiniu
-    # TODO
+    # Available values: local | cdnjs | unpkg | jsdelivr | staticfile | bootcdn | 7ed | zstatic | zeyao | custom
+    plugins: local
     # Custom CDN URL
     # For example:
     # custom_cdn_url: https://cdn.jsdelivr.net/npm/${npm_name}@${version}/${minified}
     # custom_cdn_url: https://cdnjs.cloudflare.com/ajax/libs/${cdnjs_name}/${version}/${cdnjs_file}
-    #custom_cdn_url:
-
-  # TODO
-  # Assets
-  # Accelerate delivery of static files using a CDN
-  # The js option is only valid when vendors.internal is local.
-  css: css
-  js: js
-  images: imgs
